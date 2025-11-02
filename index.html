@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Memory — Card Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <h1>Memory</h1>
+      <div class="stats">
+        <div class="moves">Moves: <span id="moves">0</span></div>
+        <div class="timer">Time: <span id="time">00:00</span></div>
+        <button id="restart" class="btn">Restart</button>
+      </div>
+    </header>
+
+    <section id="board" class="board" aria-label="Memory board"></section>
+
+    <div id="winOverlay" class="overlay hidden" role="dialog" aria-modal="true">
+      <div class="modal">
+        <h2>🎉 You won!</h2>
+        <p id="winSummary"></p>
+        <button id="playAgain" class="btn">Play again</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <small>Built with vanilla JavaScript — simacodecode-del/card-game</small>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

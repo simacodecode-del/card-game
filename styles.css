@@ -1,0 +1,148 @@
+:root{
+  --bg:#0f1724;
+  --card-bg:#e6eef8;
+  --accent:#2563eb;
+  --muted:#94a3b8;
+  --success:#16a34a;
+}
+
+*{box-sizing:border-box}
+html,body,#board{height:100%}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,#071129 0%, #0f1724 100%);
+  color:#e6eef8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+.app{
+  width:100%;
+  max-width:900px;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.header h1{
+  margin:0;
+  font-size:1.6rem;
+  letter-spacing:1px;
+}
+
+.stats{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+.moves, .timer{
+  background:rgba(255,255,255,0.03);
+  padding:8px 12px;
+  border-radius:8px;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+.btn{
+  background:var(--accent);
+  color:white;
+  border:0;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.btn:hover{filter:brightness(1.05)}
+
+.board{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(4,1fr);
+  margin-bottom:18px;
+}
+
+/* card */
+.card{
+  perspective:1000px;
+  width:100%;
+  padding-top:125%;
+  position:relative;
+  cursor:pointer;
+  user-select:none;
+}
+.card.disabled{pointer-events:none}
+.cardInner{
+  position:absolute;
+  inset:0;
+  transition:transform .45s cubic-bezier(.2,.9,.3,1);
+  transform-style:preserve-3d;
+}
+.card.flipped .cardInner{transform:rotateY(180deg)}
+
+.cardFace{
+  position:absolute;
+  inset:0;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2rem;
+  backface-visibility:hidden;
+  box-shadow: 0 6px 14px rgba(2,6,23,0.6), inset 0 -10px 30px rgba(0,0,0,0.08);
+}
+
+/* front = hidden value after flip */
+.face-front{
+  background:var(--card-bg);
+  color:#0b1220;
+  transform:rotateY(180deg);
+  font-size:2.25rem;
+}
+
+/* back = card back before flip */
+.face-back{
+  background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+  border:1px dashed rgba(255,255,255,0.03);
+  color:var(--muted);
+  font-size:1.1rem;
+}
+
+/* matched state */
+.card.matched .cardInner{box-shadow:0 0 0 4px rgba(22,163,74,0.12)}
+.card.matched .face-front{background:linear-gradient(180deg,#ecfdf5,#dcfce7); color:var(--success)}
+
+/* overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(2,6,23,0.6);
+  z-index:40;
+}
+.hidden{display:none}
+.modal{
+  background:linear-gradient(180deg,#071129,#0f1724);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:22px;
+  border-radius:12px;
+  text-align:center;
+  min-width:260px;
+}
+.modal h2{margin:0 0 10px 0}
+.modal p{color:var(--muted)}
+
+/* responsive */
+@media (max-width:640px){
+  .board{grid-template-columns:repeat(3,1fr)}
+  .cardFace{font-size:1.6rem}
+}
